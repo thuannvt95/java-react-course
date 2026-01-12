@@ -1,4 +1,4 @@
-package car.example.setter.injection;
+package com.loose.autowired.name;
 
 public class Specification {
     private String make;

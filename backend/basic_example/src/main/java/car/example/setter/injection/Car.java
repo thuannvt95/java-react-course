@@ -1,9 +1,9 @@
-package car.example.constructor.injection;
+package car.example.setter.injection;
 
 public class Car {
-    private final Specification specification;
+    private Specification specification;
 
-    public Car(Specification specification) {
+    public void setSpecification(Specification specification) {
         this.specification = specification;
     }
 

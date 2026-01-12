@@ -5,7 +5,13 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="myBean" class="car.example.bean.MyBean">
-<!--        <property name="message" value="Hello" />-->
+    <bean id="carSpec" class="car.example.constructor.injection.Specification">
+        <property name="make" value="Toyota" />
+        <property name="model" value="Test" />
     </bean>
+
+    <bean id="myCar" class="car.example.constructor.injection.Car">
+        <constructor-arg ref="carSpec" />
+    </bean>
+
 </beans>

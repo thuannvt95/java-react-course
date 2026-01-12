@@ -1,9 +1,13 @@
-package car.example.constructor.injection;
+package com.loose.autowired.constructor;
 
 public class Car {
-    private final Specification specification;
+    private Specification specification;
 
     public Car(Specification specification) {
+        this.specification = specification;
+    }
+
+    public void setSpecification(Specification specification) {
         this.specification = specification;
     }
 

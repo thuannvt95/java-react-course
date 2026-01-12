@@ -3,11 +3,11 @@ package com.component;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("employee1")
 public class Employee {
     private int employeeId;
 
-    @Value("hello")
+    @Value("hello employee1")
     private String firstName;
     private String lastName;
     private double salary;

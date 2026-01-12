@@ -6,6 +6,6 @@
 
     <!-- bean definitions here -->
     <bean id="myBean" class="car.example.bean.MyBean">
-<!--        <property name="message" value="Hello" />-->
+        <property name="message" value="Hello" />
     </bean>
 </beans>

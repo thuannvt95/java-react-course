@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@NoArgsConstructor
 public class Manager {
 //    @Autowired
     private Employee employee;

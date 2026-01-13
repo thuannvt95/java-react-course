@@ -1,0 +1,28 @@
+#spring.application.name=sb-ecom
+#spring.h2.console.enabled=true
+
+#link: https://supabase.com/dashboard/project/oohxgpvbefzosvixhdru
+  #password: 8GgdUINdEJNloT0F
+
+link: postgresql://ecommerce_pa8o_user:Np9UFBpiFzS8OezcJA6q4wm9qphKJjqk@dpg-d5j04pfpm1nc73fisbd0-a.virginia-postgres.render.com/ecommerce_pa8o
+
+spring:
+  application:
+    name: sb-ecom
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:file:./mydbfile
+  datasource:
+    url: jdbc:postgresql://dpg-d5j04pfpm1nc73fisbd0-a.virginia-postgres.render.com:5432/ecommerce_pa8o?
+    username: ecommerce_pa8o_user
+    password: Np9UFBpiFzS8OezcJA6q4wm9qphKJjqk
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect

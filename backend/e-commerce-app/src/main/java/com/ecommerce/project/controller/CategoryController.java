@@ -26,6 +26,7 @@ public class CategoryController {
 
     @RequestMapping(path = "/api/public/categories", method = RequestMethod.POST)
     public String createCategory(@RequestBody Category category) {
+        categoryService.createCategory(category);
         return "ok";
     }
 }

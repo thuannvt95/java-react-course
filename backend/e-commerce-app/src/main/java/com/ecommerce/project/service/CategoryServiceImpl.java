@@ -1,5 +1,7 @@
 package com.ecommerce.project.service;
 
+import com.ecommerce.project.exception.ApiException;
+import com.ecommerce.project.exception.ResourceNotFoundException;
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.repository.CategoryRepository;
 import lombok.AccessLevel;
@@ -13,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -26,11 +29,19 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public List<Category> getALlCategories() {
         List<Category> categories = categoryRepository.findAll();
+        if (categories.isEmpty()) {
+            throw new ApiException("No category created till now");
+        }
         return categories;
     }
 
     @Override
     public void createCategory(Category category) {
+        Category foundCategory = categoryRepository.findFirstByCategoryName(category.getCategoryName());
+        if (Objects.nonNull(foundCategory)) {
+            throw new ApiException("category name already existed");
+        }
+
         categoryRepository.save(category);
     }
 
@@ -39,7 +50,7 @@ public class CategoryServiceImpl implements CategoryService{
         Optional<Category> foundCat = categoryRepository.findById(id);
 
         if (foundCat.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+            throw new ResourceNotFoundException("Category", "categoryId", id);
         }
 
         categoryRepository.delete(foundCat.get());
@@ -50,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService{
         Optional<Category> foundCat = categoryRepository.findById(id);
 
         if (foundCat.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+            throw new ResourceNotFoundException("Category", "categoryId", id);
         }
 
         foundCat.get().setCategoryName(category.getCategoryName());

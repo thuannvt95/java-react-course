@@ -7,10 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -29,5 +32,28 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public void createCategory(Category category) {
         categoryRepository.save(category);
+    }
+
+    @Override
+    public void deleteCategory(String id) {
+        Optional<Category> foundCat = categoryRepository.findById(id);
+
+        if (foundCat.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+        }
+
+        categoryRepository.delete(foundCat.get());
+    }
+
+    @Override
+    public void updateCategory(String id, Category category) {
+        Optional<Category> foundCat = categoryRepository.findById(id);
+
+        if (foundCat.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found");
+        }
+
+        foundCat.get().setCategoryName(category.getCategoryName());
+        categoryRepository.save(foundCat.get());
     }
 }

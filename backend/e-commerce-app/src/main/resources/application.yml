@@ -20,7 +20,7 @@ spring:
     password: Np9UFBpiFzS8OezcJA6q4wm9qphKJjqk
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     show-sql: true
     properties:
       hibernate:

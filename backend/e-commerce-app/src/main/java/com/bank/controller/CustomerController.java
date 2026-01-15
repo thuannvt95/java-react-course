@@ -5,6 +5,8 @@ import com.bank.service.CustomerService;
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,8 +21,8 @@ public class CustomerController {
     private CustomerService customerService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Customer> getAllCustomer() {
-        return customerService.getAllCustomer();
+    public Page<Customer> getAllCustomer(Pageable pageable) {
+        return customerService.getAllCustomer(pageable);
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)

@@ -22,7 +22,5 @@ public class Category extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     String categoryId;
 
-    @NotBlank(message = "categoryName is mandatory")
-    @Size(min = 5, message = "Category name must contain at least 5 characters")
     String categoryName;
 }

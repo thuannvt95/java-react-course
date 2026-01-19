@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> methodInvocationTargetException(RuntimeException e) {
+    public ResponseEntity<?> methodRuntimeException(RuntimeException e) {
         Map<String, String> response = new HashMap<>();
         return new ResponseEntity<>(new ApiResponse(e.getMessage(), false), HttpStatus.BAD_REQUEST);
     }

@@ -27,7 +27,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
     ModelMapper modelMapper;
 

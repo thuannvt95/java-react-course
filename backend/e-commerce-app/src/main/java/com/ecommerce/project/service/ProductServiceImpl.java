@@ -9,12 +9,14 @@ import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.payload.ProductResponse;
 import com.ecommerce.project.repository.CategoryRepository;
 import com.ecommerce.project.repository.ProductRepository;
+import com.ecommerce.project.specification.ProductSpecification;
 import jakarta.persistence.EntityManager;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -63,10 +65,15 @@ public class ProductServiceImpl implements ProductService {
                                                 String categoryId,
                                                 String categoryName,
                                                 Pageable pageable) {
-        Page<Product> products = productRepository.findByKeyword(productName,
-                                                                 categoryId,
-                                                                 categoryName,
-                                                                 pageable);
+        Specification<Product> spec =   ProductSpecification.hasName(productName)
+                                                            .and(ProductSpecification.hasCategoryId(categoryId))
+                                                            .and(ProductSpecification.hasCategoryName(categoryName));
+
+//                Specification.where(ProductSpecification.hasName(productName))
+//                                                      .and(ProductSpecification.hasCategoryId(categoryId))
+//                                                      .and(ProductSpecification.hasCategoryName(categoryName));
+        Page<Product> products = productRepository.findAll(spec,
+                                                           pageable);
         if (products.isEmpty()) {
             throw new ApiException("No product found");
         }

@@ -1,0 +1,5 @@
+server:
+  port: 9217
+spring:
+  application:
+    name: app-crud
